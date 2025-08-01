@@ -5,7 +5,16 @@ dotenv.config({
     path: './env'
 })
 
+//connectDB is storing a async function which technically returns a promise
 connectDB()
+.then(() => {
+    app.listen(process.env.PORT || 8000, () => {
+        console.log(`server is running at port: ${process.env.PORT}`)
+    })
+})
+.catch((err) => {
+    console.log("MongoDB connection failed !!! ", err);
+})
 
 
 // one method to connect database to atlas
